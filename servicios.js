@@ -80,3 +80,7 @@ function insert() {
 
 
 }//fin insert
+
+function update(){
+    
+}
