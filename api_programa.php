@@ -2,17 +2,17 @@
 
 $accion = $_GET["accion"];
 
-  $id = "";
+  $id_p = "";
   $nombre = "";
   $descripcion = "";
   $inicio = "";
   $fin = "";
-  $id_dia = "";
+  $dia = "";
 
 
 
 if ( isset( $_POST["id_p"]) ){
-  $id = $_POST["id_p"];
+  $id_p = $_POST["id_p"];
 }
 
 if (isset( $_POST["nombre"])) {
@@ -25,19 +25,19 @@ if (isset( $_POST["descripcion"])) {
   $descripcion = $_POST["descripcion"];
 }
 
-if (isset( $_POST["h_inicio"])) {
+if (isset( $_POST["inicio"])) {
   // code...
-  $inicio = $_POST["h_inicio"];
+  $inicio = $_POST["inicio"];
 }
 
-if (isset( $_POST["h_fin"])) {
+if (isset( $_POST["fin"])) {
   // code...
-  $fin = $_POST["h_fin"];
+  $fin = $_POST["fin"];
 }
 
-if (isset( $_POST["id_dia"])) {
+if (isset( $_POST["dia"])) {
     // code...
-    $id_dia = $_POST["id_dia"];
+    $dia = $_POST["dia"];
   }
 
 
@@ -46,6 +46,11 @@ switch ($accion) {
         # code...
         select();
         break;
+
+        case 'insert':
+          # code...
+          insert ($nombre, $descripcion, $inicio, $fin, $dia);
+          break;
     
     default:
         # code...
@@ -77,7 +82,30 @@ function select(){
 
 
 
+function insert ( $nombre, $descripcion, $inicio, $fin, $dia){
 
+  
+
+  require_once("conexion.php");
+    $sql = "insert into programa 
+            (Nombre, Descripcion, H_inicio, H_final , Id_dia)
+            values 
+            ('$nombre', '$descripcion', '$inicio', '$fin', '$dia')";
+
+    $mensaje = array ();
+    if ( $conn->query($sql) === TRUE){
+        $mensaje_temporal = array("Mensaje"=>"Insercion Exitosa", "Excepcion"=>$conn->error);
+        $mensaje [] = $mensaje_temporal;
+    }else {
+        
+        $mensaje_temporal = array("Mensaje"=>"Insercion Fallida", "Excepcion"=>$conn->error);
+        $mensaje [] = $mensaje_temporal;
+
+    }
+
+    echo json_encode($mensaje);
+
+}//fin insert
 
 
 

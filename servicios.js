@@ -37,3 +37,46 @@ function select() {
 });
 
 }//fin select
+
+function insert() {
+
+    
+
+      let id_p = $("#id_p").val();
+      let nombre = $("#nombre").val();
+      let descripcion = $("#descripcion").val();
+      let inicio = $("#h_inicio").val();
+      let fin = $("#h_fin").val();
+      let id_dia = $("#id_dia").val();
+
+
+      let datos =  {
+        "id": id_p,
+        "nombre": nombre,
+        "descripcion": descripcion,
+        "inicio": inicio,
+        "fin": fin,
+        "dia": id_dia
+      };
+
+      console.log(datos)
+
+      $.ajax({
+        type: "POST",
+        url: "api_programa.php?accion=insert",
+        dataType : "json",
+        data: datos,
+        success: function( data ) {
+
+            console.log(data);
+
+        }
+      });
+
+      
+
+
+
+
+
+}//fin insert
