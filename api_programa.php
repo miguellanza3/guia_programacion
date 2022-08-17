@@ -108,7 +108,9 @@ function insert ( $nombre, $descripcion, $inicio, $fin, $dia){
 }//fin insert
 
 
-
+function update (){
+  
+}
 
 
 //fin del documento
