@@ -51,7 +51,11 @@ switch ($accion) {
           # code...
           insert ($nombre, $descripcion, $inicio, $fin, $dia);
           break;
-    
+          
+          case 'update':
+            # code...
+            update ($id_p, $nombre, $descripcion, $inicio, $fin, $dia);
+            break;
     default:
         # code...
         break;
@@ -108,9 +112,33 @@ function insert ( $nombre, $descripcion, $inicio, $fin, $dia){
 }//fin insert
 
 
-function update (){
+function update ($id_p, $nombre, $descripcion, $inicio, $fin, $dia){
   
-}
+  require_once("conexion.php");
+
+    $sql = "UPDATE programa
+            set Id_programa = '$id_p',
+            nombre = '$nombre',
+            descripcion = '$descripcion',
+            H_inicio = '$inicio',
+            H_final = '$fin',
+            Id_dia = '$dia',
+            where Id = '$id_p' ";
+
+    $mensaje = array ();
+    if ( $conn->query($sql) === TRUE){
+        $mensaje_temporal = array("Mensaje"=>"Actualizacion Exitosa", "Excepcion"=>$conn->error);
+        $mensaje [] = $mensaje_temporal;
+    }else {
+        
+        $mensaje_temporal = array("Mensaje"=>"Actualizacion Fallida", "Excepcion"=>$conn->error);
+        $mensaje [] = $mensaje_temporal;
+
+    }
+
+    echo json_encode($mensaje);
+
+  }//fin update
 
 
 //fin del documento
