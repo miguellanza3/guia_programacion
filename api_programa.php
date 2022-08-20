@@ -56,6 +56,11 @@ switch ($accion) {
             # code...
             update ($id, $nombre, $descripcion, $inicio, $fin, $dia);
             break;
+
+          case 'delete':
+              // code...
+              delete_($id);
+              break;  
     default:
         # code...
         break;
@@ -139,6 +144,25 @@ function update ($id, $nombre, $descripcion, $inicio, $fin, $dia ){
   echo json_encode($mensaje);
 
 }//fin update
+
+
+function delete_($id){
+  require_once("conexion.php");
+  $sql = "DELETE from programa where Id_programa = '$id' ";
+
+  $mensaje = array ();
+  if ( $conn->query($sql) === TRUE){
+      $mensaje_temporal = array("Mensaje"=>"Borrado Exitoso", "Excepcion"=>$conn->error);
+      $mensaje [] = $mensaje_temporal;
+  }else {
+
+      $mensaje_temporal = array("Mensaje"=>"Borrado Fallido", "Excepcion"=>$conn->error);
+      $mensaje [] = $mensaje_temporal;
+
+  }
+
+  echo json_encode($mensaje);
+}//fin delete
 
 
 //fin del documento

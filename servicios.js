@@ -109,5 +109,27 @@ function update(){
 
       }
     });
+    let a = document.getElementById('ZonaImpresion').onclick(window.location.reload ());
 }//fin update
 
+function delete_(){
+  let id = $("#id_p").val();
+  let datos = {
+        "id":id
+    };
+
+    console.log(datos);
+
+    $.ajax({
+        type: "POST",
+        url: "api_programa.php?accion=delete",
+        dataType : "json",
+        data: datos,
+        success: function( data ) {
+
+            console.log(data);
+
+        }
+      });
+      let a = document.getElementById('ZonaImpresion').onclick(window.location.reload ());
+}//fin delete
