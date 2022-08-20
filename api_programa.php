@@ -2,7 +2,7 @@
 
 $accion = $_GET["accion"];
 
-  $id_p = "";
+  $id = "";
   $nombre = "";
   $descripcion = "";
   $inicio = "";
@@ -11,8 +11,8 @@ $accion = $_GET["accion"];
 
 
 
-if ( isset( $_POST["id_p"]) ){
-  $id_p = $_POST["id_p"];
+if ( isset( $_POST["id"]) ){
+  $id = $_POST["id"];
 }
 
 if (isset( $_POST["nombre"])) {
@@ -54,7 +54,7 @@ switch ($accion) {
           
           case 'update':
             # code...
-            update ($id_p, $nombre, $descripcion, $inicio, $fin, $dia);
+            update ($id, $nombre, $descripcion, $inicio, $fin, $dia);
             break;
     default:
         # code...
@@ -112,33 +112,33 @@ function insert ( $nombre, $descripcion, $inicio, $fin, $dia){
 }//fin insert
 
 
-function update ($id_p, $nombre, $descripcion, $inicio, $fin, $dia){
-  
+function update ($id, $nombre, $descripcion, $inicio, $fin, $dia ){
+
   require_once("conexion.php");
 
-    $sql = "UPDATE programa
-            set Id_programa = '$id_p',
-            nombre = '$nombre',
-            descripcion = '$descripcion',
-            H_inicio = '$inicio',
-            H_final = '$fin',
-            Id_dia = '$dia',
-            where Id = '$id_p' ";
+  $sql = "UPDATE `programa` 
+  set Id_programa ='$id', 
+      Nombre ='$nombre', 
+      Descripcion= '$descripcion', 
+      H_inicio ='$inicio', 
+      H_final='$fin', 
+      Id_dia ='$dia' 
+      where Id_programa = '$id' ";
 
-    $mensaje = array ();
-    if ( $conn->query($sql) === TRUE){
-        $mensaje_temporal = array("Mensaje"=>"Actualizacion Exitosa", "Excepcion"=>$conn->error);
-        $mensaje [] = $mensaje_temporal;
-    }else {
-        
-        $mensaje_temporal = array("Mensaje"=>"Actualizacion Fallida", "Excepcion"=>$conn->error);
-        $mensaje [] = $mensaje_temporal;
+  $mensaje = array ();
+  if ( $conn->query($sql) === TRUE){
+      $mensaje_temporal = array("Mensaje"=>"Actualizacion Exitosa", "Excepcion"=>$conn->error);
+      $mensaje [] = $mensaje_temporal;
+  }else {
+      
+      $mensaje_temporal = array("Mensaje"=>"Actualizacion Fallida", "Excepcion"=>$conn->error);
+      $mensaje [] = $mensaje_temporal;
 
-    }
+  }
+  
+  echo json_encode($mensaje);
 
-    echo json_encode($mensaje);
-
-  }//fin update
+}//fin update
 
 
 //fin del documento

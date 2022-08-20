@@ -79,33 +79,35 @@ function insert() {
 
 function update(){
     
-    let id = $("#id_p").val();
+    let id_p = $("#id_p").val();
     let nombre = $("#nombre").val();
     let descripcion = $("#descripcion").val();
     let inicio = $("#h_inicio").val();
     let fin = $("#h_fin").val();
-    let dia = $("#id_dia").val();
+    let id_dia = $("#id_dia").val();
 
-    let datos = {
-        "id":id, 
-        "nombre":nombre,
-        "descripcion":descripcion,
-        "inicio":inicio,
-        "fin":fin,
-        "dia" : dia
+
+    let datos =  {
+      "id":id_p,
+      "nombre":nombre,
+      "descripcion":descripcion,
+      "inicio":inicio,
+      "fin":fin,
+      "dia":id_dia
     };
 
-    console.log(datos);
+    console.log(datos)
 
     $.ajax({
-        type: "POST",
-        url: "api_programa.php?accion=update",
-        dataType : "json",
-        data: datos,
-        success: function( data ) {
+      type: "POST",
+      url: "api_programa.php?accion=update",
+      dataType : "json",
+      data: datos,
+      success: function( data ) {
 
-            console.log(data);
+          console.log(data);
 
-        }
-      });
+      }
+    });
 }//fin update
+
